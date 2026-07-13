@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'username', 'address'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -22,11 +22,12 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    // funcion que se encarga de caster los atributos de la tabla users, en este caso el email_verified_at se castea a datetime y el password se castea a hashed
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed', // se realiza el hash de la contraseña automaticamente al crear un registro
         ];
     }
 }
